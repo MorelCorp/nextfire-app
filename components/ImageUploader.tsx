@@ -24,12 +24,6 @@ export default function ImageUploader() {
     // Listen to updates to upload task
     task.on(STATE_CHANGED, (snapshot) => {
       const pct = Math.trunc(((snapshot.bytesTransferred / snapshot.totalBytes) + Number.EPSILON) * 100);
-
-      console.log(`Upload in progress - ${pct}%
-        snapshot.bytesTransferred - ${snapshot.bytesTransferred} / 
-        snapshot.totalBytes - ${snapshot.totalBytes}`);
-
-
       setProgress(pct);
 
       // Get downloadURL AFTER task resolves (Note: this is not a native Promise)
