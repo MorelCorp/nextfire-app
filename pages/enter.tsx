@@ -1,5 +1,6 @@
 import { auth, firestore, googleAuthProvider } from '../lib/firebase';
 import { UserContext } from '../lib/context';
+import Image from 'next/image';
 
 import { useContext, useEffect, useState, useCallback } from 'react';
 import debounce from 'lodash.debounce';
@@ -26,7 +27,12 @@ function SignInButton() {
 
   return (
     <button className="btn-google" onClick={signInWithGoogle}>
-      <img src={'/google.png'} width='30px' /> Sign in with Google
+      <Image
+        src={'/google.png'}
+        width={200}
+        height={200}
+        alt='Google logo'
+      /> Sign in with Google
     </button>
   );
 }
@@ -77,13 +83,10 @@ function UsernameForm() {
     }
   };
 
-  useEffect(() => {
-    checkUsername(formValue);
-  }, [formValue]);
 
   // hit the db for username match after each debounced change
   // useCallback required for debounce to work with react
-  const checkUsername = useCallback(
+  const checkUsername = useCallback((username) => {
     debounce(async (username) => {
       if (username.length >= 3) {
         const ref = firestore.doc(`usernames/${username}`);
@@ -91,9 +94,14 @@ function UsernameForm() {
         setIsValid(!exists);
         setLoading(false);
       }
-    }, 500),
+    }, 500);
+  },
     []
   );
+
+  useEffect(() => {
+    checkUsername(formValue);
+  }, [checkUsername, formValue]);
 
   return (
     !username && (

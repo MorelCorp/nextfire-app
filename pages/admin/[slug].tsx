@@ -46,7 +46,7 @@ function PostManager() {
           <aside>
             <h3>Tools</h3>
             <button onClick={() => setPreview(!preview)}>{preview ? 'Edit' : 'Preview'}</button>
-            <Link href={`/${post.username}/${post.slug}`}>
+            <Link href={`/${post.username}/${post.slug}`} passHref>
               <button className="btn-blue">Live view</button>
             </Link>
           </aside>

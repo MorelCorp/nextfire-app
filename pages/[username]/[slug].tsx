@@ -81,7 +81,7 @@ export default function Post({ post, path }) {
 
         <AuthCheck
           fallback={
-            <Link href="/enter">
+            <Link href="/enter" passHref>
               <button>💗 Sign Up</button>
             </Link>
           }
@@ -90,7 +90,7 @@ export default function Post({ post, path }) {
         </AuthCheck>
 
         {currentUser?.uid === post.uid && (
-          <Link href={`/admin/${post.slug}`}>
+          <Link href={`/admin/${post.slug}`} passHref>
             <button className="btn-blue">Edit Post</button>
           </Link>
         )}

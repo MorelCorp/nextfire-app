@@ -20,7 +20,7 @@ function PostItem({ post, admin = false }) {
           <strong>By @{post.username}</strong>
         </a>
       </Link>
-      <Link href={`/${post.username}/${post.slug}`}>
+      <Link href={`/${post.username}/${post.slug}`} passHref>
         <h2>
           <a>{post.title}</a>
         </h2>
@@ -35,7 +35,7 @@ function PostItem({ post, admin = false }) {
       {/* If admin view, show extra controls for user */}
       {admin && (
         <>
-          <Link href={`/admin/${post.slug}`}>
+          <Link href={`/admin/${post.slug}`} passHref>
             <h3>
               <button className="btn-blue">Edit</button>
             </h3>

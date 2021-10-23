@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from 'next/image';
 import { useRouter } from "next/router";
 import { useContext } from "react";
 import { UserContext } from "../lib/context";
@@ -19,7 +20,7 @@ export default function Navbar() {
     <nav className="navbar">
       <ul>
         <li>
-          <Link href="/">
+          <Link href="/" passHref>
             <button className="btn-logo">NXT</button>
           </Link>
         </li>
@@ -31,13 +32,18 @@ export default function Navbar() {
               <button onClick={signOut}>Sign Out</button>
             </li>
             <li>
-              <Link href="/admin">
+              <Link href="/admin" passHref>
                 <button className="btn-blue">Write Posts</button>
               </Link>
             </li>
             <li>
-              <Link href={`/${username}`}>
-                <img src={user?.photoURL} />
+              <Link href={`/${username}`} passHref>
+                <Image
+                  src={user?.photoURL}
+                  alt={`/${username} photo`}
+                  width={200}
+                  height={200}
+                />
               </Link>
             </li>
           </>
@@ -45,7 +51,7 @@ export default function Navbar() {
 
         {/* user is not signed-in OR has not created a username */}
         {!username && (
-          <Link href="/enter">
+          <Link href="/enter" passHref>
             <button className="btn-blue">Log in</button>
           </Link>
         )}
